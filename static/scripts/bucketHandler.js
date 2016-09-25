@@ -3,6 +3,7 @@
  */
 
 var isOpen = false;
+var bucket = {};
 
 function stateHandler() {
     if(isOpen)
