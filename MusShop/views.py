@@ -21,7 +21,7 @@ def detail(request, type_id):
 def ajaxTest(request):
     context = {}
 
-    return render(request, "currentItem.html", context)
+    return render(request, "itemList.html", context)
     # return render(request, "itemList.html", context)
 
 
@@ -29,3 +29,8 @@ def bucketOpen(request):
     context = {'info' : 'some info'}
 
     return render(request, "bucketList.html", context)
+
+def getCurrent(request):
+    context = {}
+
+    return render(request, "currentItem.html", context)

@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
     url(r'^ajaxTest', views.ajaxTest),
-    url(r'^bucketOpen', views.bucketOpen)
+    url(r'^bucketOpen', views.bucketOpen),
+    url(r'^getCurrent', views.getCurrent)
 ]
