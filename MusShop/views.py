@@ -16,3 +16,16 @@ def index(request):
 
 def detail(request, type_id):
     return HttpResponse("You're looking at question %s." % type_id)
+
+
+def ajaxTest(request):
+    context = {}
+
+    return render(request, "currentItem.html", context)
+    # return render(request, "itemList.html", context)
+
+
+def bucketOpen(request):
+    context = {'info' : 'some info'}
+
+    return render(request, "bucketList.html", context)

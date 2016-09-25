@@ -26,8 +26,9 @@ class Size(models.Model):
 
 class Instrument(models.Model):
     count = models.IntegerField()
-    coast = models.DecimalField(max_digits=10, decimal_places=2)
+    coast = models.DecimalField(max_digits=10, decimal_places=2)  # cost
     model = models.CharField(max_length=30)
+    # info
 
     type = models.ForeignKey(Type, on_delete=models.CASCADE)
     manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)

@@ -4,9 +4,22 @@
 
 
 function testz() {
-    console.log("testz")
+    console.log("testz");
+
+    // $(document).ready(function() {
+    //    $('#result').html("Changed!!");
+    // });
 
     $(document).ready(function() {
-       $('#result').html("Changed!!");
+        console.log("ready");
+        $.ajax({
+            type: 'GET',
+            url: '/ajaxTest',
+            //data: {"name": "Andrew", "nickname": "Aramis"},
+            success: function (data) {
+                console.log("success");
+                $('#content').html(data);
+            }
+        });
     });
 }
