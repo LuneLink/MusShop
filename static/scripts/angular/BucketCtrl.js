@@ -3,19 +3,26 @@
  */
 
 
-function BucketCtrl ($scope, cache) {
+function BucketCtrl ($scope, $location, cache, AjaxService) {
 
     this.bucketState = false;
+    this.searchState = false;
+
+    this.userName = "";
+    this.userPhone = "";
+    this.userAdress = "";
 
     this.changeState = function () {
         this.bucketState = !this.bucketState;
     };
 
+    this.changeSearchState = function () {
+        this.searchState = !this.searchState;
+    };
+
     var currentCache = cache.get('bucket');
 
     if(currentCache) {
-        console.log("Hello NNOOOOOTT empty cache");
-        console.log(currentCache);
         this.bucket = currentCache;
     }
 
@@ -25,7 +32,6 @@ function BucketCtrl ($scope, cache) {
 
     this.addInBucket = function (id, name, cost) {
         var res = false;
-        //this.bucket = cache.get('bucket');
 
         for(var i = 0; i < this.bucket.length; i++) {
             if(this.bucket[i].id === id) {
@@ -39,7 +45,6 @@ function BucketCtrl ($scope, cache) {
             this.bucket.push({'id': id, 'name' : name, 'cost': cost, 'count': 1});
 
         cache.put('bucket', this.bucket);
-        //bucketService.setBucket(this.bucket);
     };
 
     this.removeFromBucket = function (id) {
@@ -60,8 +65,19 @@ function BucketCtrl ($scope, cache) {
         return result;
     };
 
-    // this.removeFromBucket = function (id) {
-    //
-    // };
+    this.submitPurchase = function () {
+        console.log("SUBMITING");
+        console.log(this.bucket);
+        var result = AjaxService.makeAjax('/submitPurchase', {'bucket': this.bucket,
+                                                                'userName': this.userName,
+                                                                'userPhone': this.userPhone,
+                                                                'userAdress': this.userAdress});
+
+        result.then(function(response) {
+            $scope.content = response.content;
+            $location.path("/successPurchase");
+        });
+
+    };
 
 }

@@ -1,3 +1,4 @@
+import json
 from django.http import JsonResponse
 from django.shortcuts import render
 
@@ -20,8 +21,12 @@ def detail(request, type_id):
 
 
 def itemList(request):
-    context = {'message': "GET OUT!",
-               'content': [
+    search = json.loads(request.GET.get('send'))[u'searchParams']
+    print(search)
+    if(search == {}):
+        context = {'message': "GET OUT!",
+                   'pageCount': 2,
+                   'content': [
                    {
                         'id': 1,
                         'manufacturer': 'Jackson',
@@ -47,6 +52,36 @@ def itemList(request):
                        'cost': 100
                    }
                ]}
+    else:
+        context = {'message': "GET OUT!",
+                   'pageCount': 1,
+                   'content': [
+                       {
+                           'id': 1,
+                           'manufacturer': 'Jackson',
+                           'model': 'KingV',
+                           'cost': 100
+                       },
+                       {
+                           'id': 1,
+                           'manufacturer': 'Jackson',
+                           'model': 'KingV',
+                           'cost': 100
+                       },
+                       {
+                           'id': 3,
+                           'manufacturer': 'Jackson',
+                           'model': 'Dinky DK7-M',
+                           'cost': 100
+                       },
+                       {
+                           'id': 4,
+                           'manufacturer': 'Jackson',
+                           'model': 'Minion',
+                           'cost': 100
+                       }
+                   ]}
+
     print(request.GET.get('send'))
     return JsonResponse(context)
     # return render(request, "test.html", context)
@@ -58,5 +93,12 @@ def getCurrent(request):
                'cost': 100,
                'manufacturer': 'Jackson',
                'model': 'KingV'}
+
+    return JsonResponse(context)
+
+
+def submitPurchase(request):
+    context = {}
+    print(request.GET.get('send'))
 
     return JsonResponse(context)

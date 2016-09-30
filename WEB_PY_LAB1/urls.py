@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
     url(r'^itemList', views.itemList),
-    url(r'^getCurrent', views.getCurrent)
+    url(r'^getCurrent', views.getCurrent),
+    url(r'^submitPurchase', views.submitPurchase)
 ]

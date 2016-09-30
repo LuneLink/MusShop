@@ -3,9 +3,6 @@
  */
 
 
-
-
-
 // Popover initialization.
 // $(document).ready(function(){
 //     console.log("init");

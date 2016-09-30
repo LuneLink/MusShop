@@ -13,7 +13,7 @@ function Route($routeProvider, path) {
             }
         }
     })
-    .when("/itemList/:id", {
+    .when("/itemList/:typeId/:pageId", {
         templateUrl: "itemList.htm",
         controller: 'ListCtrl',
         resolve: {
@@ -32,6 +32,16 @@ function Route($routeProvider, path) {
         }
 
     })
+    .when("/successPurchase", {
+        templateUrl: "successPurchase.htm",
+        // controller: 'successController',
+        resolve: {
+            data: function () {
+                console.log("/////////////4");
+            }
+        }
+
+    })
     .otherwise({
         controller: 'BucketCtrl'
     });
@@ -43,9 +53,9 @@ app.factory('CacheFactory', function($cacheFactory) {
     cache.put('bucket', []);
     return cache;
 });
-app.controller('BucketCtrl', ['$scope', 'CacheFactory', BucketCtrl]);
-app.service('NamesService', NamesService);
 app.service('AjaxService', AjaxService);
+app.service('NamesService', NamesService);
+app.controller('BucketCtrl', ['$scope', '$location', 'CacheFactory', 'AjaxService', BucketCtrl]);
 app.controller('ListCtrl', ['$scope','$routeParams', 'NamesService', 'AjaxService', ListCtrl]);
 app.controller('ItemCtrl', ['$scope','$routeParams', 'NamesService', 'AjaxService', ItemCtrl]);
 app.config(['$routeProvider', Route]);
