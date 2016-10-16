@@ -11,7 +11,7 @@ function ItemCtrl($scope, $routeParams, NamesService, AjaxService) {
             var content = JSON.parse(response.content);
             $scope.id = content[0].id;
             $scope.information = response.information;
-            $scope.cost = response.cost;
+            $scope.cost = content[0].coast;
             $scope.manufacturer = content[0].manufacturer__name;
             $scope.model = content[0].model;
         })

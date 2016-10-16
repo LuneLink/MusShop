@@ -1,4 +1,6 @@
 import json
+
+import decimal
 from django.http import JsonResponse
 from django.shortcuts import render
 
@@ -19,104 +21,37 @@ def index(request):
 def detail(request, type_id):
     return HttpResponse("You're looking at question %s." % type_id)
 
+def decimal_default(obj):
+    if isinstance(obj, decimal.Decimal):
+        return float(obj)
+    raise TypeError
 
 def itemList(request):
-    items = Instrument.objects.filter(type="1").values('id', 'manufacturer__name', 'model', 'type')
+    recieve = json.loads(request.GET.get('send'))
+
+    items = Instrument.objects.filter(type=str(recieve[u'typeId']))\
+        .values('id', 'manufacturer__name', 'model', 'type', 'coast')
     print("Items: ")
     print(items)
-    # posts = (Post.objects.filter(owner=authenticated_user)
-    #
-    #         .values('id', 'title', 'summary'))
-    json_items = json.dumps(list(items))
+
+    json_items = json.dumps(list(items), default=decimal_default)
     print("JSON Items: ")
     print(json_items)
 
-    search = json.loads(request.GET.get('send'))[u'searchParams']
-    print("Search")
-    print(search)
     context = {'content': json_items,
                'pageCount': 1}
-    # if(search == {}):
-    #     context = {'message': "GET OUT!",
-    #                'pageCount': 2,
-    #                'content': [
-    #                {
-    #                     'id': 1,
-    #                     'manufacturer__name': 'Jackson',
-    #                     'model': 'KingV',
-    #                     'cost': 100
-    #                },
-    #                {
-    #                    'id': 2,
-    #                    'manufacturer__name': 'Jackson',
-    #                    'model': 'Dinky DK2',
-    #                    'cost': 100
-    #                },
-    #                {
-    #                    'id': 3,
-    #                    'manufacturer__name': 'Jackson',
-    #                    'model': 'Dinky DK7-M',
-    #                    'cost': 100
-    #                },
-    #                {
-    #                    'id': 4,
-    #                    'manufacturer__name': 'Jackson',
-    #                    'model': 'Minion',
-    #                    'cost': 100
-    #                }
-    #            ]}
-    # else:
-    #     context = {'message': "GET OUT!",
-    #                'pageCount': 1,
-    #                'content': [
-    #                    {
-    #                        'id': 1,
-    #                        'manufacturer__name': 'Jackson',
-    #                        'model': 'KingV',
-    #                        'cost': 100
-    #                    },
-    #                    {
-    #                        'id': 1,
-    #                        'manufacturer__name': 'Jackson',
-    #                        'model': 'KingV',
-    #                        'cost': 100
-    #                    },
-    #                    {
-    #                        'id': 3,
-    #                        'manufacturer__name': 'Jackson',
-    #                        'model': 'Dinky DK7-M',
-    #                        'cost': 100
-    #                    },
-    #                    {
-    #                        'id': 4,
-    #                        'manufacturer__name': 'Jackson',
-    #                        'model': 'Minion',
-    #                        'cost': 100
-    #                    }
-    #                ]}
 
-    print(request.GET.get('send'))
     return JsonResponse(context)
-    # return render(request, "test.html", context)
 
 
 def getCurrent(request):
     recieve = json.loads(request.GET.get('send'))
-    print(recieve[u'typeId'])
-    print(recieve[u'currentId'])
 
-    items = Instrument.objects.filter(type="1", id=recieve[u'currentId']).values('id', 'manufacturer__name', 'model', 'type')
-    json_items = json.dumps(list(items))
+    items = Instrument.objects.filter(type="1", id=recieve[u'currentId'])\
+        .values('id', 'manufacturer__name', 'model', 'type', 'coast')
+    json_items = json.dumps(list(items), default=decimal_default)
     context = {'content': json_items,
-                'information': 'INFOOOO',
-               'cost': 100}
-    # context = {'information': 'Some awesome information',
-    #            #'id': int(request.GET.get('send')[u'currentId']),
-    #            'cost': 100,
-    #            'manufacturer': 'Jackson',
-    #            'model': 'KingV'}
-
-
+                'information': 'INFOOOO'}
 
     return JsonResponse(context)
 

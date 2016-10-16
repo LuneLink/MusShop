@@ -79,8 +79,8 @@
                     <img src="static/{{ getPicture(item.manufacturer__name, item.model) }}" alt="KingV" style="width:100%; height:100%; background-color: ghostwhite;">
                 </a>
                 <div id="bot"  style="border-style: solid; border-color: #39e600; background-color: #39e600;">
-                    <div style="font-size: 1.2vw; width: 50%; float: left;"><b>100 $</b></div> <!-- {{ item.cost }} -->
-                    <div ng-click="main.addInBucket(item.id, getFullName(item.manufacturer__name,item.model), 100)" align="right" style="font-size: 1.2vw;">
+                    <div style="font-size: 1.2vw; width: 50%; float: left;"><b>{{ item.coast }} $</b></div> <!-- {{ item.cost }} -->
+                    <div ng-click="main.addInBucket(item.id, getFullName(item.manufacturer__name,item.model), item.coast)" align="right" style="font-size: 1.2vw;">
                         <b>add in bucket</b>
                     </div>
                 </div>
