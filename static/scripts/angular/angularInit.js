@@ -22,7 +22,7 @@ function Route($routeProvider, path) {
             }
         }
     })
-    .when("/getCurrent/:currentId", {
+    .when("/getCurrent/:typeId/:currentId", {
         templateUrl: "currentItem.htm",
         controller: 'ItemCtrl',
         resolve: {

@@ -21,7 +21,7 @@ class Size(models.Model):
     width = models.DecimalField(max_digits=4, decimal_places=2)
 
     def __str__(self):
-        return self.height
+        return str(self.height)
 
 
 class Instrument(models.Model):

@@ -45,7 +45,7 @@ function ListCtrl($scope, $routeParams, NamesService, AjaxService) {
         $scope.currentSearchState = false;
 
         result.then(function(response) {
-            $scope.content = response.content;
+            $scope.content = JSON.parse(response.content);
             $scope.pageCount = $scope.formPages(response.pageCount);
         })
     };
@@ -54,8 +54,8 @@ function ListCtrl($scope, $routeParams, NamesService, AjaxService) {
 
     $scope.pageId = $routeParams.pageId;
     $scope.typeId = $routeParams.typeId;
-    $scope.pageId = 1;
-    $scope.image = "images/Jackson_KingV.png";
+    //$scope.pageId = 1;
+    // $scope.image = "images/Jackson_KingV.png";
 
     $scope.searchType = "None";
     $scope.searchValue = "";

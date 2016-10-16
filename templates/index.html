@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -73,14 +73,14 @@
             <ul style="list-style-type: none; padding: 0; margin-left: 0;">
             <li ng-repeat="item in content" style="display: block; float: left; width: 45%; margin-left: 3%; margin-right: 2%; margin-top: 5%;">
                 <div id="head"  style="border-style: solid; border-color: #39e600; background-color: #39e600;">
-                    <div align="center" style="font-size: 1.8vw;"><b>{{getFullName(item.manufacturer,item.model)}}</b></div>
+                    <div align="center" style="font-size: 1.8vw;"><b>{{getFullName(item.manufacturer__name,item.model)}}</b></div>
                 </div>
-                <a href="#getCurrent/{{ item.id }}">
-                    <img src="static/{{ getPicture(item.manufacturer, item.model) }}" alt="KingV" style="width:100%; height:100%; background-color: ghostwhite;">
+                <a href="#getCurrent/{{ item.type }}/{{ item.id }}">
+                    <img src="static/{{ getPicture(item.manufacturer__name, item.model) }}" alt="KingV" style="width:100%; height:100%; background-color: ghostwhite;">
                 </a>
                 <div id="bot"  style="border-style: solid; border-color: #39e600; background-color: #39e600;">
-                    <div style="font-size: 1.2vw; width: 50%; float: left;"><b>{{ item.cost }} $</b></div>
-                    <div ng-click="main.addInBucket(item.id, getFullName(item.manufacturer,item.model), item.cost)" align="right" style="font-size: 1.2vw;">
+                    <div style="font-size: 1.2vw; width: 50%; float: left;"><b>100 $</b></div> <!-- {{ item.cost }} -->
+                    <div ng-click="main.addInBucket(item.id, getFullName(item.manufacturer__name,item.model), 100)" align="right" style="font-size: 1.2vw;">
                         <b>add in bucket</b>
                     </div>
                 </div>
@@ -190,6 +190,7 @@
 
                     <!-- Modal -->
                     <div id="myModal" class="modal fade" role="dialog">
+                        <form name="myForm">
                         <div class="modal-dialog">
 
                             <!-- Modal content-->
@@ -201,15 +202,30 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label style="float: left;" for="usr">Name:</label>
-                                    <input ng-model="main.userName" type="text" class="form-control" id="usr">
+                                    <div>
+                                        <input ng-model="main.userName" name="nameField" type="text" class="form-control" id="usr" style="" required>
+                                        <label ng-show="myForm.nameField.$touched && myForm.nameField.$invalid" style="color: red; font-size: 0.7vw;" for="usr">
+                                            Field is empty
+                                        </label>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label style="float: left;" for="usr">Phone number:</label>
-                                    <input ng-model="main.userPhone" type="text" class="form-control" id="usr">
+                                    <div>
+                                        <input ng-model="main.userPhone" name="phoneField" type="text" class="form-control" id="usr" required>
+                                        <label ng-show="myForm.phoneField.$touched && myForm.phoneField.$invalid" style="color: red; font-size: 0.7vw;" for="usr">
+                                            Field is empty
+                                        </label>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label style="float: left;" for="usr">Adress:</label>
-                                    <input ng-model="main.userAdress" type="text" class="form-control" id="usr">
+                                    <div>
+                                        <input ng-model="main.userAdress" name="adressFiled" type="text" class="form-control" id="usr" required>
+                                        <label ng-show="myForm.adressFiled.$touched && myForm.adressFiled.$invalid" style="color: red; font-size: 0.7vw;" for="usr">
+                                            Field is empty
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -218,6 +234,7 @@
                             </div>
                             </div>
                         </div>
+                        </form>
                     </div> <!-- end modal -->
                 </div>
             </div>

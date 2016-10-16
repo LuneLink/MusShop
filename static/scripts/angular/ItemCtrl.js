@@ -8,15 +8,23 @@ function ItemCtrl($scope, $routeParams, NamesService, AjaxService) {
         var result = AjaxService.makeAjax(url, data);
 
         result.then(function(response) {
-            $scope.id = response.id;
+            var content = JSON.parse(response.content);
+            $scope.id = content[0].id;
             $scope.information = response.information;
             $scope.cost = response.cost;
-            $scope.manufacturer = response.manufacturer;
-            $scope.model = response.model;
+            $scope.manufacturer = content[0].manufacturer__name;
+            $scope.model = content[0].model;
         })
     };
 
-    this.makeAjax('/getCurrent', $routeParams.currentId);
+    $scope.getParams = function (typeId, currentId) {
+        return {'currentId': currentId,
+                'typeId': typeId}
+    };
+
+    this.makeAjax('/getCurrent', $scope.getParams($routeParams.typeId, $routeParams.currentId));
+
+
     // $http({
     //     method: "GET",
     //     url: '/getCurrent',
