@@ -64,7 +64,7 @@
         <div align="center" id="scroll">
             <ul class="list-inline" style="list-style-type: none; padding: 0; margin-left: 0;">
                 <li ng-repeat="item in pageCount">
-                    <a href="#itemList/{{ pageId }}/{{ item }}">[{{ item }}] </a>
+                    <a href="#itemList/{{ typeId }}/{{ item }}">[{{ item }}] </a>
                 </li>
             </ul>
         </div>
@@ -94,7 +94,7 @@
         <div align="center" id="scroll">
             <ul class="list-inline" style="list-style-type: none; padding: 0; margin-left: 0;">
                 <li ng-repeat="item in pageCount">
-                    <a href="#itemList/{{ pageId }}/{{ item }}">[{{ item }}] </a>
+                    <a href="#itemList/{{ typeId }}/{{ item }}">[{{ item }}] </a>
                 </li>
             </ul>
         </div>
@@ -138,11 +138,11 @@
     </div>
 
     <div id="center">
-    <div id="left-menu" class="well" style="width: 15%; float: left; background-color:whitesmoke;">
+    <div id="left-menu" style="width: 15%; float: left; background-color:whitesmoke;">
         {% if types %}
-        <ul>
+        <ul class="list-group" style="color: whitesmoke;">
             {% for type in types %}
-                <li><a href="#itemList/{{ type.id }}/1">{{ type.name }}</a></li>
+                <li class="list-group-item"><a href="#itemList/{{ type.id }}/1">{{ type.name }}</a></li>
             {% endfor %}
         </ul>
         {% else %}
