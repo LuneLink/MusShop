@@ -3,7 +3,6 @@
  */
 
 function ListCtrl($scope, $routeParams, NamesService, AjaxService) {
-    console.log("FUCK YEAAAH");
 
     //$scope.currentSearchState = false;
 

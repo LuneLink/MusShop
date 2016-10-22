@@ -58,7 +58,7 @@ def itemList(request):
             items = Instrument.objects.filter(type=str(recieve[u'typeId']), manufacturer__name=str(searchValue))\
                 .values('id', 'manufacturer__name', 'model', 'type', 'coast')
         if (searchType == u'By model'):
-            items = Instrument.objects.filter(type=str(recieve[u'typeId']), model=str(searchValue))\
+            items = Instrument.objects.filter(type=str(recieve[u'typeId']), model__search=str(searchValue))\
                                 .values('id', 'manufacturer__name', 'model', 'type', 'coast')
         if (searchType == u'By cost'):
             items = Instrument.objects.filter(type=str(recieve[u'typeId']), coast=searchValue)\
