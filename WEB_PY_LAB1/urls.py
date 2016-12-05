@@ -13,16 +13,26 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
-
+from rest_framework import routers
 
 from MusShop import views
+
+router = routers.DefaultRouter()
+router.register(r'instruments', views.InstrumentViewSet)
+router.register(r'manufacturers', views.ManufacturerViewSet)
+router.register(r'sizes', views.SizeViewSet)
+router.register(r'types', views.TypeViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
     url(r'^itemList', views.itemList),
     url(r'^getCurrent', views.getCurrent),
-    url(r'^submitPurchase', views.submitPurchase)
+    url(r'^submitPurchase', views.submitPurchase),
+
+    # url(r'^instruments', views.InstrumentViewSet, name='instruments'),
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

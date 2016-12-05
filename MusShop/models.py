@@ -8,12 +8,18 @@ class Type(models.Model):
     def __str__(self):
         return self.name
 
+    def __init__(self, *args, **kwargs):
+        super(Type, self).__init__(*args, **kwargs)
+
 
 class Manufacturer(models.Model):
     name = models.CharField(max_length=30)
 
     def __str__(self):
         return self.name
+
+    def __init__(self, *args, **kwargs):
+        super(Manufacturer, self).__init__(*args, **kwargs)
 
 
 class Size(models.Model):
@@ -22,6 +28,9 @@ class Size(models.Model):
 
     def __str__(self):
         return str(self.height)
+
+    def __init__(self, *args, **kwargs):
+        super(Size, self).__init__(*args, **kwargs)
 
 
 class Instrument(models.Model):
@@ -36,3 +45,7 @@ class Instrument(models.Model):
 
     def __str__(self):
         return self.model
+
+    def __init__(self, *args, **kwargs):
+        super(Instrument, self).__init__(*args, **kwargs)
+
