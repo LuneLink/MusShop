@@ -36,8 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    # 'celery_app',
-    'WEB_PY_LAB1',
+    'djcelery',
+    # 'WEB_PY_LAB1',
     'MusShop',
 ]
 
