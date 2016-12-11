@@ -12,6 +12,8 @@ from rest_framework import viewsets
 from MusShop.serializers import *
 from .models import *
 
+from tasks import test
+
 import redis
 
 # REST api
@@ -30,7 +32,7 @@ class ManufacturerViewSet(viewsets.ModelViewSet):
     API endpoint that allows Instrument to be viewed or edited.
     """
     queryset = Manufacturer.objects.all()
-    serializer_class = InstrumentSerializer
+    serializer_class = ManufacturerSerializer
 
 
 class TypeViewSet(viewsets.ModelViewSet):
@@ -38,7 +40,7 @@ class TypeViewSet(viewsets.ModelViewSet):
     API endpoint that allows Instrument to be viewed or edited.
     """
     queryset = Type.objects.all()
-    serializer_class = InstrumentSerializer
+    serializer_class = TypeSerializer
 
 
 class SizeViewSet(viewsets.ModelViewSet):
@@ -46,7 +48,7 @@ class SizeViewSet(viewsets.ModelViewSet):
     API endpoint that allows Instrument to be viewed or edited.
     """
     queryset = Size.objects.all()
-    serializer_class = InstrumentSerializer
+    serializer_class = SizeSerializer
 
 
 #  views
@@ -174,5 +176,6 @@ def submitPurchase(request):
     context = {}
     # recieve = request.GET.get('send')
     # print(recieve[u'typeId'])
-
+    print "PURCHASE"
+    test("some param")
     return JsonResponse(context)
