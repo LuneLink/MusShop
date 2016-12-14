@@ -35,7 +35,8 @@ class Size(models.Model):
 
 class Instrument(models.Model):
     count = models.IntegerField()
-    coast = models.DecimalField(max_digits=10, decimal_places=2)  # cost
+    # coast = models.DecimalField(max_digits=10, decimal_places=2)  # cost
+    coast = models.IntegerField()
     model = models.CharField(max_length=30)
     # info
 
